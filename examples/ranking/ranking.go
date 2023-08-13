@@ -17,12 +17,12 @@ func SetupFilters() []func(*providers.BarHistory) bool {
 	return filters
 }
 
-func SetupRanking() func(*[]stock_screener.Asset) {
+func SetupRanking() func([]stock_screener.Asset) {
 	// Stupid ranking that just changes the order of the assets
-	return func(assets *[]stock_screener.Asset) {
-		(*assets)[0].Symbol = "GOOGL"
-		(*assets)[1].Symbol = "MSFT"
-		(*assets)[2].Symbol = "AAPL"
+	return func(assets []stock_screener.Asset) {
+		assets[0].Symbol = "GOOGL"
+		assets[1].Symbol = "MSFT"
+		assets[2].Symbol = "AAPL"
 	}
 }
 

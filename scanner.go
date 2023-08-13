@@ -12,7 +12,7 @@ var log, _ = zap.NewProduction()
 
 type Scanner struct {
 	Filters        []func(bars *providers.BarHistory) bool
-	Ranking        func(*[]Asset)
+	Ranking        func([]Asset)
 	Assets         []Asset
 	LookBackPeriod int
 	provider       providers.DataProvider
@@ -22,7 +22,7 @@ type Asset struct {
 	Symbol string
 }
 
-func NewScanner(assets []Asset, lookBackPeriod int, filters []func(*providers.BarHistory) bool, ranking func(*[]Asset)) *Scanner {
+func NewScanner(assets []Asset, lookBackPeriod int, filters []func(*providers.BarHistory) bool, ranking func([]Asset)) *Scanner {
 	return &Scanner{
 		Assets:         assets,
 		Ranking:        ranking,
@@ -101,7 +101,7 @@ func (s *Scanner) Scan() []Asset {
 
 	if s.Ranking != nil {
 		log.Info("Apply ranking")
-		s.Ranking(&assetsToConsider)
+		s.Ranking(assetsToConsider)
 	}
 
 	return assetsToConsider
