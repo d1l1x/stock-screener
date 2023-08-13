@@ -21,6 +21,17 @@ type BarHistory struct {
 	Volume   []int64
 }
 
+type BarType int
+
+const (
+	Open = iota
+	High
+	Low
+	Close
+	AdjClose
+	Volume
+)
+
 type DataProvider interface {
 	GetHistBars(symbol string, period int) (*BarHistory, error)
 }
