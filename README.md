@@ -89,9 +89,8 @@ func main() {
 
 ### Advanced example using filters and ranking
 
-Like for the simple example, this example uses FMP, sets up a scanner but this time with a list of three
-assets, scans it applying the provided filters and finally ranks it according to the given ranking
-function.
+Like for the simple example, this example uses FMP, sets up a scanner but this time with a list of four
+assets and scans it applying the provided filters.
 
 ```go
 package main
@@ -99,43 +98,46 @@ package main
 import (
 	"fmt"
 	stock_screener "github.com/d1l1x/stock-screener"
+	"github.com/d1l1x/stock-screener/indicators"
 	"github.com/d1l1x/stock-screener/providers"
 )
+
+func reverse(slice []float64) {
+	for i := len(slice)/2 - 1; i >= 0; i-- {
+		opp := len(slice) - 1 - i
+		slice[i], slice[opp] = slice[opp], slice[i]
+	}
+}
 
 func SetupFilters() []func(*providers.BarHistory) bool {
 	var filters []func(*providers.BarHistory) bool
 
-	// Stupid filter that checks if the last close is greater than 0
-	filters = append(filters, func(history *providers.BarHistory) bool {
-		return (history.Close[len(history.Close)-1]) > 0
-	})
+	filters = append(filters,
+		func(bars *providers.BarHistory) bool {
+			// Indicators assume the most recent value to be the last,
+			// so we have to reverse fmp data
+			reverse(bars.Close)
+			roc := indicators.ROC(bars.Close, 10)
+			return roc[len(roc)-1] < 0.0
+		})
 
 	return filters
-}
-
-func SetupRanking() func(*[]stock_screener.Asset) {
-	// Stupid ranking that just changes the order of the assets
-	return func(assets *[]stock_screener.Asset) {
-		(*assets)[0].Symbol = "GOOGL"
-		(*assets)[1].Symbol = "MSFT"
-		(*assets)[2].Symbol = "AAPL"
-	}
 }
 
 func main() {
 
 	assets := []stock_screener.Asset{
 		{Symbol: "AAPL"},
-		{Symbol: "MSFT"},
 		{Symbol: "GOOGL"},
+		{Symbol: "MSFT"},
+		{Symbol: "PG"},
 	}
 
 	filters := SetupFilters()
-	ranking := SetupRanking()
 
-	scanner := stock_screener.NewScanner(assets, 10, filters, ranking)
+	scanner := stock_screener.NewScanner(assets, 100, filters, nil)
 
-	err := scanner.Init(providers.Fmp, "../../envs/fmp.env")
+	err := scanner.Init(providers.Fmp, "./envs/fmp.env")
 	if err != nil {
 		panic(err)
 	}
@@ -143,6 +145,7 @@ func main() {
 	watchlist := scanner.Scan()
 	fmt.Println(watchlist)
 }
+
 ```
 
 ## Contributing
