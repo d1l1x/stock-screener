@@ -20,6 +20,8 @@ type Scanner struct {
 
 type Asset struct {
 	Symbol string
+	Name   string
+	Id     string
 }
 
 func NewScanner(assets []Asset, lookBackPeriod int, filters []func(*providers.BarHistory) bool, ranking func([]Asset)) *Scanner {
