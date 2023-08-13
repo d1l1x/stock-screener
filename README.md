@@ -1,3 +1,8 @@
+[![Build Status](https://github.com/d1l1x/stock-screener/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/d1l1x/stock-screener/actions/workflows/go.yml)
+[![CodeQL](https://github.com/d1l1x/stock-screener/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/d1l1x/stock-screener/actions/workflows/github-code-scanning/codeql)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=d1l1x_stock-screener&metric=coverage)](https://sonarcloud.io/summary/new_code?id=d1l1x_stock-screener)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=d1l1x_stock-screener&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=d1l1x_stock-screener)
+
 # Stock screener
 
 Stock screener is a tool that scans through a list of assets and returns a list of assets that
