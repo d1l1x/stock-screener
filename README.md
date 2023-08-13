@@ -1,5 +1,5 @@
 [![Build Status](https://github.com/d1l1x/stock-screener/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/d1l1x/stock-screener/actions/workflows/go.yml)
-[![CodeQL](https://github.com/d1l1x/stock-screener/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/d1l1x/stock-screener/actions/workflows/github-code-scanning/codeql)
+[![CodeQL](https://github.com/d1l1x/stock-screener/actions/workflows/codeql.yml/badge.svg)](https://github.com/d1l1x/stock-screener/actions/workflows/codeql.yml)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=d1l1x_stock-screener&metric=coverage)](https://sonarcloud.io/summary/new_code?id=d1l1x_stock-screener)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=d1l1x_stock-screener&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=d1l1x_stock-screener)
 
