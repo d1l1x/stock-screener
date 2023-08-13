@@ -58,3 +58,10 @@ func sliceAlmostEqual(a, b []float64, acc float64, args ...string) (bool, error)
 	}
 	return true, nil
 }
+
+func reverse(slice []float64) {
+	for i := len(slice)/2 - 1; i >= 0; i-- {
+		opp := len(slice) - 1 - i
+		slice[i], slice[opp] = slice[opp], slice[i]
+	}
+}
